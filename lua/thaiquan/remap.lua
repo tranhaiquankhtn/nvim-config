@@ -5,14 +5,14 @@ vim.keymap.set('n', '<C-c>', '<cmd>noh<CR>') -- Clear highlights
 -- vim.keymap.set('i', '<c-c>', '<Esc>')
 
 
-vim.keymap.set('n', '<Space>', '<NOP>')
-vim.keymap.set('n', '<C-\\>', ':NvimTreeToggle<CR>')
-vim.keymap.set('n', '<Leader>r', ':NvimTreeRefresh<CR>')
+-- vim.keymap.set('n', '<Space>', '<NOP>')
+-- vim.keymap.set('n', '<C-\\>', ':NvimTreeToggle<CR>')
+-- vim.keymap.set('n', '<Leader>r', ':NvimTreeRefresh<CR>')
 
 -- navigate between buffers
 -- vim.keymap.set('n', '<C-q>', ':bw<CR>')
-vim.keymap.set('n', '<TAB>', ':bnext<CR>')
-vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>')
+-- vim.keymap.set('n', '<TAB>', ':bnext<CR>')
+-- vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>')
 
 -- navigate between windows
 vim.keymap.set('n', '<Leader>h', '<C-w>h')
