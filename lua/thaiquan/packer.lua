@@ -28,7 +28,7 @@ return require('packer').startup(function(use)
     use({ 'sainnhe/gruvbox-material' })
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-    use("nvim-treesitter/nvim-treesitter-context")
+    use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 
     use('ThePrimeagen/harpoon')
 

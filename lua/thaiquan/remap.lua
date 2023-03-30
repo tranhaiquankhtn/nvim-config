@@ -34,7 +34,7 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 -- TAB Completion
-vim.keymap.set('i', '<expr><TAB>', 'pumvisible() ? "<C-n>" : "<TAB>"')
+-- vim.keymap.set('i', '<expr><TAB>', 'pumvisible() ? "<C-n>" : "<TAB>"')
 
 -- move line up and down
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv')

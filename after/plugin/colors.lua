@@ -1,14 +1,20 @@
 require('rose-pine').setup({
-    dark_variant = 'main',
     disable_background = true,
+    variant = 'main',
+    highlight_groups = {
+        -- Keyword = { bg = 'highlight_high' },
+        -- Function = { bg = 'none', blend = 10 },
+    }
 })
 
-function SetColorScheme(color)
-    color = color or "rose-pine" -- "gruvbox-material"
+function ColorScheme(color)
+    color = color or "gruvbox-material"
     vim.cmd.colorscheme(color)
 
-    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    vim.o.termguicolors = true
+    vim.g.nvcode_termcolors = 256
+    -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-SetColorScheme()
+ColorScheme()
