@@ -40,6 +40,8 @@ vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', 'J', ':m \'>+1<CR>gv=gv')
 vim.keymap.set('v', 'K', ':m \'<-2<CR>gv=gv')
 
+vim.keymap.set('n', '<C-\\>', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<Leader>r', ':NvimTreeRefresh<CR>')
 
 -- greatest remap ever
 vim.keymap.set('v', '<Leader>p', '\"_dP')
