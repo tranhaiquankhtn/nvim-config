@@ -1,5 +1,6 @@
 require("thaiquan.remap")
 require("thaiquan.set")
+require("thaiquan.plugins")
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
