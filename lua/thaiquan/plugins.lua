@@ -19,7 +19,7 @@ local plugins = {
     "numToStr/Comment.nvim",
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.1',
+        tag = '0.1.4',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     {
@@ -67,6 +67,18 @@ local plugins = {
         'glepnir/galaxyline.nvim',
         branch = 'main',
         dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }
+    },
+
+    {
+        'mg979/vim-visual-multi', branch = 'master'
+    },
+    {
+        "kylechui/nvim-surround",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({})
+        end
     },
 
     -- nvim-tree
@@ -226,6 +238,11 @@ local plugins = {
 
             })
         end
+    },
+
+    {
+        'stevearc/conform.nvim',
+        opts = {},
     },
 
     -- LSP
