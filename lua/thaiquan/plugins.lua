@@ -90,65 +90,31 @@ local plugins = {
         end
     },
 
+    {
+        'mg979/vim-visual-multi',
+        branch = 'master',
+
+    },
+
     -- LSP config
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
-        lazy = true,
-        config = function()
-            local lsp_zero = require('lsp-zero')
-            lsp_zero.configure('lua_ls', {
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { 'vim' }
-                        }
-                    }
-                }
-            })
+        dependencies = {
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' },             -- Required
+            { 'williamboman/mason.nvim' },           -- Optional
+            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
-            lsp_zero.set_sign_icons({
-                error = "",
-                warning = "",
-                hint = "",
-                information = "",
-                other = "﫠"
-            })
+            -- Autocompletion
+            { 'hrsh7th/nvim-cmp' },     -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
 
-            lsp_zero.format_on_save({
-                format_opts = {
-                    async = false,
-                    timeout_ms = 10000,
-                },
-                servers = {
-                    ['tsserver'] = { 'javascript', 'typescript' },
-                    ['rust_analyzer'] = { 'rust' },
-                    ['pylsp'] = { 'python' },
-                    ['lua_ls'] = { 'lua' },
-                    ['taplo'] = { 'toml' },
-                }
-            })
+            -- rust tools
+            { 'simrat39/rust-tools.nvim' },
 
-            lsp_zero.on_attach(function(client, bufnr)
-                local opts = { buffer = bufnr, remap = false }
-                vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-                vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-                vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-                vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-                vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-                vim.keymap.set("n", "<leader>rf", function() vim.lsp.buf.references() end, opts)
-                vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-                vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-                vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
-
-                -- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })")
-            end)
-
-            lsp_zero.setup({})
-        end
-
+        }
     },
     -- Mason
     {
