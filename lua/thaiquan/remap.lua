@@ -54,8 +54,9 @@ vim.keymap.set('n', 'Y', 'y$')
 
 -- vim.keymap.set('n', '<Leader>d', '\"_d')
 -- vim.keymap.set('v', '<Leader>d', '\"_d')
+
 --- JDTLS mappings
-vim.keymap.set("n", "<Leader>coa", "<Cmd>lua require'jdtls'.organize_imports()<CR>")
+vim.keymap.set("n", "<Leader>si", "<Cmd>lua require'jdtls'.organize_imports()<CR>")
 vim.keymap.set("n", "<Leader>dt", "<Cmd>lua require'jdtls'.test_class()<CR>")
 vim.keymap.set("n", "<Leader>dn", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>")
 vim.keymap.set("v", "<Leader>crv", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>")

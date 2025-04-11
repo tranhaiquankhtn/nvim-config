@@ -97,114 +97,47 @@ local plugins = {
     },
 
     -- LSP config
-    {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+    -- {
+    --     'VonHeikemen/lsp-zero.nvim',
+    --     branch = 'v3.x',
+    --     dependencies = {
+    --         -- LSP Support
+    --         { 'neovim/nvim-lspconfig' },             -- Required
+    --         { 'williamboman/mason.nvim' },           -- Optional
+    --         { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },     -- Required
-            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' },     -- Required
+    --         -- Autocompletion
+    --         { 'hrsh7th/nvim-cmp' },     -- Required
+    --         { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+    --         { 'L3MON4D3/LuaSnip' },     -- Required
 
-            -- rust tools
-            { 'simrat39/rust-tools.nvim' },
+    --         -- rust tools
+    --         { 'simrat39/rust-tools.nvim' },
 
-        }
-    },
+    --     }
+    -- },
     -- Mason
     {
         'williamboman/mason.nvim',
         lazy = false,
-        config = true,
+        config = true
     },
 
     -- Autocompletion
-    {
-        'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-vsnip",
-            "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-buffer",
-            'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip',
-            "hrsh7th/vim-vsnip",
-        },
-        config = function()
-            local lsp_zero = require('lsp-zero')
-            lsp_zero.extend_cmp()
-
-            local cmp = require('cmp')
-            cmp.setup({
-                sources = {
-                    { name = 'nvim_lsp',               keyword_length = 3 }, -- from language server
-                    { name = 'nvim_lsp_signature_help' },                    -- display function signatures with current parameter emphasized
-                    { name = 'nvim_lua',               keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
-                    { name = 'buffer',                 keyword_length = 2 }, -- source current buffer
-                    { name = 'vsnip',                  keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
-                },
-
-                -- formatting = cmp_format,
-                formatting = {
-                    fields = { 'menu', 'abbr', 'kind' },
-                    format = function(entry, item)
-                        local menu_icon = {
-                            nvim_lsp = 'λ',
-                            vsnip = '⋗',
-                            buffer = 'Ω',
-                            path = '',
-                        }
-                        item.menu = menu_icon[entry.source.name]
-                        return item
-                    end,
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                snippet = {
-                    expand = function(args)
-                        require('luasnip').lsp_expand(args.body)
-                    end,
-                },
-                mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-                    ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-                    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-                    -- [",."] = cmp.mapping.close(),
-
-                    ['<C-y>'] = cmp.mapping.confirm({ select = false }),
-                    ['<C-e>'] = cmp.mapping.abort(),
-                    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
-                    ['<Down>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
-                    ['<C-p>'] = cmp.mapping(function()
-                        if cmp.visible() then
-                            cmp.select_prev_item({ behavior = 'insert' })
-                        else
-                            cmp.complete()
-                        end
-                    end),
-                    ['<C-n>'] = cmp.mapping(function()
-                        if cmp.visible() then
-                            cmp.select_next_item({ behavior = 'insert' })
-                        else
-                            cmp.complete()
-                        end
-                    end),
-
-                },
-
-            })
-        end
-    },
+    -- {
+    --     'hrsh7th/nvim-cmp',
+    --     event = 'InsertEnter',
+    --     dependencies = {
+    --         "hrsh7th/cmp-nvim-lsp",
+    --         "hrsh7th/cmp-vsnip",
+    --         "hrsh7th/cmp-nvim-lsp-signature-help",
+    --         "hrsh7th/cmp-path",
+    --         "hrsh7th/cmp-buffer",
+    --         'L3MON4D3/LuaSnip',
+    --         'saadparwaiz1/cmp_luasnip',
+    --         "hrsh7th/vim-vsnip",
+    --     },
+    -- },
 
     {
         'stevearc/conform.nvim',
@@ -217,102 +150,20 @@ local plugins = {
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
         },
-        config = function()
-            -- This is where all the LSP shenanigans will live
-            local lsp_zero = require('lsp-zero')
-            lsp_zero.extend_lspconfig()
-
-            require('mason-lspconfig').setup({
-                ensure_installed = {
-                    'tsserver',
-                    'eslint',
-                    'lua_ls',
-                    'rust_analyzer',
-                    'pylsp',
-                    'volar',
-                    'gopls',
-                    'jdtls',
-                },
-                handlers = {
-                    lsp_zero.default_setup,
-                    -- lua ls
-                    lua_ls = function()
-                        local lua_opts = lsp_zero.nvim_lua_ls()
-                        require('lspconfig').lua_ls.setup(lua_opts)
-                    end,
-
-                    -- rust-analyzer
-                    rust_analyzer = function()
-                        require('lspconfig').rust_analyzer.setup({
-                            settings = {
-                                ['rust_analyzer'] = {
-                                    imports = {
-                                        granularity = {
-                                            group = "module",
-                                        },
-                                        prefix = "self",
-                                    },
-                                    cargo = {
-                                        buildScripts = {
-                                            enable = true,
-                                        },
-                                    },
-                                    procMacro = {
-                                        enable = true
-                                    },
-                                    checkOnSave = {
-                                        command = "clippy",
-                                    },
-                                }
-                            }
-                        })
-                    end,
-                }
-            })
-        end
     },
+
 
 
     -- Rust tools
-    {
-        'simrat39/rust-tools.nvim',
-        dependencies = {
-            { 'hrsh7th/cmp-nvim-lsp' }
-        },
-        config = function()
-            local opts = {
-                tools = {
-                    runnables = {
-                        use_telescope = true,
-                    },
-                    inlay_hints = {
-                        auto = true,
-                        show_parameter_hints = false,
-                        parameter_hints_prefix = "",
-                        other_hints_prefix = "",
-                    },
-                },
-
-                server = {
-                    -- on_attach = on_attach,
-                    settings = {
-                        ["rust-analyzer"] = {
-                            checkOnSave = {
-                                command = "clippy",
-                            },
-                        },
-                    },
-                },
-            }
-
-            require("rust-tools").setup(opts)
-        end
-    },
+    { 'simrat39/rust-tools.nvim' },
     { 'nvim-lua/plenary.nvim' },
     { 'mfussenegger/nvim-dap' },
+
+    -- Java ls extension
+    { 'mfussenegger/nvim-jdtls' }
 }
 
 local opts = {}
