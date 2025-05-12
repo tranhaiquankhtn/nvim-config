@@ -22,6 +22,7 @@ autocmd('TextYankPost', {
     end,
 })
 
+
 autocmd({ "BufWritePre" }, {
     group = lspFormatting,
     pattern = "*",
@@ -42,6 +43,10 @@ vim.diagnostic.config({
         current_line = true
     }
 })
+
+
+vim.cmd("set completeopt+=noselect")
+vim.o.winborder = 'rounded'
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
