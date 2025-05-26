@@ -1,8 +1,8 @@
 require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
-        javascript = { { "prettierd", "prettier" } },
-        typescript = { { "prettierd", "prettier" } },
+        -- javascript = { { "prettierd", "prettier" } },
+        -- typescript = { { "prettierd", "prettier" } },
         vue = { { "prettierd", "prettier" } },
         yaml = { "yamlfix" },
         sh = { "shfmt" },

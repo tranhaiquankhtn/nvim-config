@@ -6,5 +6,6 @@ vim.lsp.enable({
     'rust_analyzer',
     'ts_ls',
     'jdtls',
-    'kotlin_ls'
+    'kotlin_ls',
+    'bash_ls'
 })
